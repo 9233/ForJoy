@@ -1,0 +1,59 @@
+这个库让你可以控制和监控输入设备。
+
+对于每一种输入设备，它包含一个子包来控制和监控该种输入设备：
+
+    pynput.mouse：包含控制和监控鼠标或者触摸板的类。
+
+    pynput.keyboard：包含控制和监控键盘的类。
+
+基本用法介绍：
+from  pynput.mouse import Button, Controller
+import time 
+
+mouse = Controller()
+print(mouse.position)
+time.sleep(3)
+print('The current pointer position is {0}'.format(mouse.position))
+
+
+#set pointer positon
+mouse.position = (277, 645)
+print('now we have moved it to {0}'.format(mouse.position))
+
+#鼠标移动（x,y）个距离
+mouse.move(5, -5)
+print(mouse.position)
+
+mouse.press(Button.left)
+mouse.release(Button.left)
+
+#Double click
+mouse.click(Button.left, 1)
+
+#scroll two  steps down
+mouse.scroll(0, 500)
+
+=======================================
+
+from pynput.keyboard import Key, Controller
+
+keyboard = Controller()
+
+#Press and release space
+keyboard.press(Key.space)
+keyboard.release(Key.space)
+
+#Type a lower case A ;this will work even if no key on the physical keyboard  is labelled 'A'
+keyboard.press('a')
+keyboard.release('a')
+
+#Type two  upper case As
+keyboard.press('A')
+keyboard.release('A')
+# or 
+with keyboard .pressed(Key.shift):
+    keyboard.press('a')
+    keyboard.release('a')
+
+#type 'hello world '  using the shortcut type  method
+keyboard.type('hello world')
