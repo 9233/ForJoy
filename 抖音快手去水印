@@ -1,0 +1,32 @@
+Douyin去水印:
+
+
+=========================
+import re
+import requests
+
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1'}
+
+
+def parse_douyin(url):
+
+    r = requests.get(url, allow_redirects=True)
+    redirecturl = r.url
+    rct = requests.get(redirecturl, headers=headers)
+
+    playurl = re.findall('playAddr:(.*?)\,', str(rct.text))[0]
+    playurl = playurl.replace('playwm', 'play')
+    playurl = playurl.replace("\"", "")
+    print(playurl)
+
+url = 'https://v.douyin.com/4aSo1k/'
+parse_douyin(url)
+
+============================
+
+
+https://t880216t.github.io/2019/03/28/dytransf/
+
+https://www.videoparse.cn/
